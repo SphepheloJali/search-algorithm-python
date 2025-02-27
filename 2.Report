@@ -1,0 +1,56 @@
+
+
+2a)Heuristic Evaluation Function
+The heuristic evaluation function is defined as: f(n)=h(n)+g(n)f where:
+•	h(n) represents the number of elements still on the center circle E. For instance, 
+in the initial state, E contains 8 elements: [1, 2, 3, 4, 5, 6, 7, 8], so the heuristic value is 8.
+After moving to state 1, where E becomes [2, 3, 4, 5, 6, 7, 8], the heuristic value decreases to 7
+because there are now 7 elements left on E. The goal is to reach the final state when E is empty
+(i.e., E:[]), at which point the heuristic will be 0, indicating that all
+elements have been moved and the problem is solved.
+For the cost g(n), I set it to a constant 1 for moving any disc 
+from one place to another. Each time a disc is moved, the cost increases by 1.
+Therefore, the total cost depends solely on the number of moves made,
+regardless of which disc is moved.
+
+2b)(i) Breadth-First Search (BFS)
+In this search, Breadth-First Search (BFS) is used to move discs from the center circle E
+to the correct circles A, B, C, and D. The goal is to make E empty by moving odd-numbered discs to A and C,
+and even-numbered discs to B and D. The BFS method in my code explores every possible state by moving the discs
+one at a time and checking if the state has been seen before. 
+   Each state is stored to avoid repeating moves. For example:
+    1.	Initially, all discs are on circle E: [1, 2, 3, 4, 5, 6, 7, 8].
+    2.	The first possible move is to take disc 1 from E (the smallest odd disc) and place it on A. 
+    Now, A has [1], and E has [2, 3, 4, 5, 6, 7, 8,].
+    3.	The second move would be to take disc 1 from A and place it on C, 
+    provided C is empty or has larger discs. Meanwhile, in DFS, the second move might be to move disc 2 from E to B.
+
+The process continues to explore all potential moves for each disc while keeping track of visited states. 
+BFS ensures that the search avoids revisiting the same state, preventing loops and ensuring progress toward the solution. 
+Although BFS works well by checking all options step by step, it can be time-consuming and memory-intensive with many discs. 
+In the end, BFS finds a solution, but it might not be the fastest for more complex problems.
+
+(ii) Depth-First Search (DFS)
+In this search, Depth-First Search (DFS) is used to move discs from the center circle E to the correct circles A, B, C, and D. 
+The goal is to make E empty by moving odd-numbered discs to A and C, and even-numbered discs to B and D. 
+My code implements DFS by exploring one path deeply before backtracking to try other branches. 
+For example, starting with all discs on E [1, 2, 3, 4, 5, 6, 7, 8], the first move places disc 1 on A, making A [1] and E [2, 3, 4, 5, 6, 7, 8]. 
+The second move might place disc 2 on B, unlike BFS.
+DFS explores each path to its maximum depth before backtracking, tracking states to avoid revisiting them and preventing loops. 
+This approach ensures all possible paths are explored. In my case, the DFS path to the final state was shorter than the BFS path.
+
+
+(iii) Greedy Search
+For the Greedy search, I used a strategy based on a simple heuristic. 
+The goal is to make the center circle E empty by moving odd-numbered discs to circles A and C, and even-numbered discs to circles B and D. 
+In my code, the heuristic is the number of discs still left in E. 
+The Greedy algorithm always tries to move a disc from E to a target circle where the disc should go. If a move is made, 
+it updates the state and checks if this state has been visited before. For example, it might move an 
+odd disc from E to A if A is empty, or move an even disc from E to B if B has space. 
+The algorithm focuses on reducing the number of discs in E to solve the problem.
+The Greedy approach tracks all visited states to avoid repeating moves and loops. 
+Although straightforward and often effective, it may not always find the 
+best solution or the fastest way to finish, especially with many discs.
+
+
+
